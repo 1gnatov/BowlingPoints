@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Bowling Points</title>
+    <style>
+        * {
+            margin: 1px;
+            padding: 1px;
+            font-family: Arial;
+        }
+        label {
+            width: 100px;
+            text-align: right;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+</head>
+<body>
+<div>Result: <span id="result">0</span></div>
+<form id="calcForm">
+    <script>
+        for (i = 1; i <= 10; i++) {
+            document.write('<div>');
+            document.write('<label>frame '+i+'</label>');
+            document.write('<input type="text" name="frame[]" value="" placeholder="0,0">');
+            document.write('</div>');
+        }
+    </script>
+    <input type="submit">
+</form>
+<script>
+    $(function() {
+        $("#calcForm").submit(function(e) {
+
+            var inputs = $("#calcForm input[type=\"text\"]");
+            var params = '';
+            for(i = 0; i < $("#calcForm input[type=\"text\"]").length; i++) {
+                params += 'frame[]=' + $(inputs[i])[0].value + '&';
+            }
+
+            var url = "/calc?" + params; // the script where you handle the form input.
+
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: $("#idForm").serialize(), // serializes the form's elements.
+                success: function(data)
+                {
+                    $("#result")[0].innerHTML = data;
+                }
+            });
+
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+        });
+    });
+</script>
+</body>
+</html>
