@@ -57,7 +57,9 @@ public class App {
 					try {
 						kicks[i][ii++] = (int)Integer.parseInt(bowlStr);		
 					} catch (Exception e) {
-						throw new RulesException("Number must be number");
+						throw new RulesException("Number must be number"); // показывает текст эксепшна под таблицей, 
+												   //исходя из него приходится гадать, что
+												   //именно не так введено.
 					}
 					
 				}
