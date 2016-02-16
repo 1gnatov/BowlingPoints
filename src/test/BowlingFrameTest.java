@@ -19,11 +19,11 @@ import bowlingPoints.RulesException;
 public class BowlingFrameTest {
 
 	@DataPoints({"firstkicks"})
-	public static Object[] getFirstKickPointData = new Object[][]{
-		{new Integer[] {5, 4}, 	1, 		5,		"open frame"},
+	public static Object[] getFirstKickPointData = new Object[][]{			
+		{new Integer[] {5, 4}, 	1, 		5,		"open frame"},   // что за пробелы? что такое 1? номер датапоинта?? 
 		{new Integer[] {10}, 	2, 		10,		"strike frame"},
 		{new Integer[] {}, 		3, 		0,		"empty frame"}, 
-		{new Integer[] {4, 6, 3}, 10,	4,		"last frame"},
+		{new Integer[] {4, 6, 3}, 10,	4,		"last frame"},		// номера датапоинтов поехали и получается вырвиглаз
 		{new Integer[] {0, 0}, 	5, 		0,		"zero frame"},
 		{new Integer[] {0, 10}, 6,	 	0,		"spare frame"},
 	};
@@ -33,7 +33,9 @@ public class BowlingFrameTest {
 	{
 		BowlingFrame frame;
 		frame = new BowlingFrame((Integer[])testData[0], (int)testData[1]);
-		assertTrue((String)testData[3], (int)testData[2] == frame.getFirstKickPoints());
+		assertTrue((String)testData[3], (int)testData[2] == frame.getFirstKickPoints()); //за testData[i] прячется логика, чтобы понять ее надо лезть 
+												//в структуру datapoints и запоминать расположение аргументов
+												//Как документацию к коду такие тесты использовать нельзя))
 	}
 	
 	@DataPoints({"secondkicks1"})
@@ -54,8 +56,8 @@ public class BowlingFrameTest {
 	
 	@DataPoints({"secondkicks2"})
 	public static Object[] getSecondKickPointData2 = new Object[][]{
-		{new Integer[] {}, 		1, 		4,		"empty frame"},
-		{new Integer[] {10}, 	10,		6,		"strike frame"},
+		{new Integer[] {}, 		1, 		4,		"empty frame"}, // что такое 4?
+		{new Integer[] {10}, 	10,		6,		"strike frame"},	// что такое 6?
 	};
 	
 	@Theory
