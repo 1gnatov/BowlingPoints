@@ -12,12 +12,14 @@ import bowlingPoints.BowlingFrame;
 import bowlingPoints.RulesException;
 
 @RunWith(Theories.class)
-public class BowlingCalcTest {
+public class BowlingCalcTest {				// нет отдельных тестов, в случае рефакторинга и потери работоспособности отдельных фич
+							// придется тратить время, чтобы понять, где сломалось.
+							// не представляю, как можно использовать в TDD
 
 	@DataPoints
 	public static int[][][] data = new int[][][]{
-		{ {1}, 	{0},	}, // empty
-		{ {1}, 	{0},	{}}, // empty 2
+		{ {1}, 	{0},	}, // empty		// следовало бы описать структуру data, для понимающего, какую цель выполняет программа
+		{ {1}, 	{0},	{}}, // empty 2		// можно догадаться о значении полей, в противном случае под вопросом
 		{ {2}, 	{0}, 	{0, 0},	{0, 0},	{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}	}, //zero
 		{ {3}, 	{72},	{0, 3}, {4, 3}, {4, 3}, {4, 3}, {4, 3}, {4, 3}, {4, 3}, {4, 3}, {4, 3}, {4, 6, 3}	}, //typical + last spare
 		{ {4}, 	{165},	{10}, {5, 4},	{5, 5}, {10}, {3,6}, {4,6}, {10}, {10}, {3, 3}, {10, 10, 4}	},	//typical + spare + strike + last strike
@@ -33,7 +35,7 @@ public class BowlingCalcTest {
 	@Theory
 	public void testBowlingCalc(Object... testData) throws RulesException
 	{
-		int count = testData.length - 2;
+		int count = testData.length - 2;		
 		int[][] ii = new int[count][];
 		
 		for(int i = 2; i < testData.length; i++) {
@@ -44,7 +46,8 @@ public class BowlingCalcTest {
 		int points = ((int[])testData[1])[0];
 		
 		BowlingCalc calc = new BowlingCalc();
-		assertTrue("Error on test " + testNum, points == calc.calcPoints(ii));
+		assertTrue("Error on test " + testNum, points == calc.calcPoints(ii));	// по номерам не понять, что и где сломалось
+											// надо лезть в код тестов и читать комменты к тестам????
 	}
 
 }
