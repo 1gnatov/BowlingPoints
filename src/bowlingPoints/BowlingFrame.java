@@ -18,8 +18,8 @@ public class BowlingFrame {
 		
 		this.frameNum = frameNum;
 		
-		checkRules();
-	}
+		checkRules();			// в случае ошибки, BowlingFrame будет partially initialized, хоть и кинет RulesException
+	}					// наверное, для этой программы не критично, но мне кажется, что в целом это антипаттерн
 	
 	public void setNextFrame(BowlingFrame nextFrame) {
 		this.nextFrame = nextFrame;
@@ -41,8 +41,9 @@ public class BowlingFrame {
 	public int getFirstKickPoints() {
 		if (bowls.length >= 1) {
 			return bowls[0];
+		} else {
+			return 0;	
 		}
-		return 0;
 	}
 
 	public int getSecondKickPoints() {
